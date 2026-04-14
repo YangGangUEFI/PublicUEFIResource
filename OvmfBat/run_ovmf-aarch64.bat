@@ -1,5 +1,14 @@
 @REM truncate -s 64M Build/ArmVirtQemu-AARCH64/DEBUG_GCC5/FV/QEMU_EFI.fd
 chcp 65001
+
+if exist EfiFiles (
+   echo "EfiFiles already exist!"
+) else (
+   md EfiFiles
+)
+copy Build\ArmVirtQemu-AARCH64\RELEASE_GCC5\AARCH64\*.efi EfiFiles
+copy Build\Lvgl\RELEASE_GCC5\AARCH64\*.efi EfiFiles
+
 "C:\Program Files\qemu\qemu-system-aarch64.exe" ^
   -M virt ^
   -cpu cortex-a57 ^
